@@ -13,7 +13,7 @@ public class RedisConfig {
     @Primary
 	ReactiveRedisConnectionFactory reactiveRedisConnectionFactory() {
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("127.0.0.1", 6379);
-		redisStandaloneConfiguration.setPassword("oliver10");
+		redisStandaloneConfiguration.setPassword("12345");
 		return new LettuceConnectionFactory(redisStandaloneConfiguration);
 	}
 
