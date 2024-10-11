@@ -1,17 +1,17 @@
 spring:
   #data:
     #redis:
-      #host: ${REDIS_HOST}       # Dirección del host de Redis
-      #port: ${REDIS_PORT}       # Puerto de Redis
-      #password: ${REDIS_PSS}    # Contraseña de Redis
+      #host: localhost
+      #port: 5672
+      #password: 12345
       #ssl:
-        #enabled: ${REDIS_SSL}   # Habilitar SSL si es necesario
-      #timeout: 5000             # Timeout en milisegundos
+        #enabled: false
+      #timeout: 5000             
       #lettuce:
         #pool:
-          #max-idle: 20          # Configuración del pool de conexiones de Lettuce
+          #max-idle: 20          
           #min-idle: 10
-          #max-active: 100       # Máximo de conexiones activas
+          #max-active: 100       
           #max-wait: 1000
   cloud:
     gateway:
