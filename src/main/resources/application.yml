@@ -1,0 +1,37 @@
+spring:
+  #data:
+    #redis:
+      #host: ${REDIS_HOST}       # Dirección del host de Redis
+      #port: ${REDIS_PORT}       # Puerto de Redis
+      #password: ${REDIS_PSS}    # Contraseña de Redis
+      #ssl:
+        #enabled: ${REDIS_SSL}   # Habilitar SSL si es necesario
+      #timeout: 5000             # Timeout en milisegundos
+      #lettuce:
+        #pool:
+          #max-idle: 20          # Configuración del pool de conexiones de Lettuce
+          #min-idle: 10
+          #max-active: 100       # Máximo de conexiones activas
+          #max-wait: 1000
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Methods Access-Control-Allow-Headers
+      routes:
+      - id: mock
+        uri: https://jsonplaceholder.typicode.com
+        predicates:
+        - Path=/todos/1
+        filters:
+          - name: RequestRateLimiter
+            args:
+              '[redis-rate-limiter.requestedTokens]': 1
+              '[redis-rate-limiter.replenishRate]': 1
+              '[redis-rate-limiter.burstCapacity]': 1
+              key-resolver: "#{@ipKeyResolver}"
